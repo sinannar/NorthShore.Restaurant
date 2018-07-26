@@ -13,4 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NorthShore.Restaurant.Core\NorthShore.Restaurant.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Restaurant\Dto\" />
+  </ItemGroup>
 </Project>
