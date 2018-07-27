@@ -15,10 +15,6 @@ export class RestaurantComponent extends AppComponentBase {
 
     callApi() {
 
-        this.menuServiceProxy.createFood(new CreateFoodDto()).subscribe(() => {
-
-
-        });
     }
 
 }
