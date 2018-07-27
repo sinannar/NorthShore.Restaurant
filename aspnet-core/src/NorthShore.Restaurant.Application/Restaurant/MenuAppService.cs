@@ -1,4 +1,5 @@
-﻿using Abp.Domain.Repositories;
+﻿using Abp.Authorization;
+using Abp.Domain.Repositories;
 using NorthShore.Restaurant.Restaurant.Dto;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace NorthShore.Restaurant.Restaurant
 
         public async Task CreateFood(CreateFoodDto request)
         {
-            throw new NotImplementedException();
+            await Task.Run(() => {});
+            //throw new NotImplementedException();
         }
     }
 }
