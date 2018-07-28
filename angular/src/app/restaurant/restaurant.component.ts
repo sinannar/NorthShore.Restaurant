@@ -6,7 +6,7 @@ import { MenuServiceProxy, CreateFoodDto } from '@shared/service-proxies/service
 @Component({
     templateUrl: './restaurant.component.html',
     animations: [appModuleAnimation()],
-    providers:[MenuServiceProxy]
+    providers: [MenuServiceProxy]
 })
 export class RestaurantComponent extends AppComponentBase {
 
@@ -19,7 +19,7 @@ export class RestaurantComponent extends AppComponentBase {
 
     callApi() {
         this._menuService.createFood(new CreateFoodDto()).subscribe(() => {
-            console.log("FIRST API CALL FROM FE");
+            console.log('FIRST API CALL FROM FE');
         });
     }
 
