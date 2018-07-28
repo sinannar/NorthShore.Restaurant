@@ -9,6 +9,7 @@ namespace NorthShore.Restaurant.Restaurant
     public class Menu: Entity<long>
     {
         public string Name { get; set; }
+        public decimal DiscountRate { get; set; }
         public IEnumerable<FoodMenuMapping> FoodMappings { get; set; }
     }
 }

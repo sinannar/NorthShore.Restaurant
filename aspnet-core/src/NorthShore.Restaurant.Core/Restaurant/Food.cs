@@ -12,6 +12,7 @@ namespace NorthShore.Restaurant.Restaurant
         public bool IsGlutenFree { get; set; }
         public bool IsDairyFree { get; set; }
         public bool IsNutFree { get; set; }
+        public decimal Price{get;set;}
 
         public IEnumerable<FoodMenuMapping> MenuMappings { get; set; }
     }
