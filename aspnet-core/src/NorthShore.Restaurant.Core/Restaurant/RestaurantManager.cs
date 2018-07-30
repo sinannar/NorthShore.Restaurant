@@ -2,6 +2,7 @@
 using Abp.Domain.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +28,11 @@ namespace NorthShore.Restaurant.Restaurant
         public async Task CreateFood(Food food)
         {
             await _foodRepository.InsertAsync(food);
+        }
+
+        public IQueryable<Food> ListFood()
+        {
+            return _foodRepository.GetAll();
         }
 
     }

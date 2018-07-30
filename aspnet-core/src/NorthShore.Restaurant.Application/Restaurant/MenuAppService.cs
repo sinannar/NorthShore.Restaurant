@@ -25,5 +25,12 @@ namespace NorthShore.Restaurant.Restaurant
             var adapter = new CreateFoodAdapter();
             await _restaurantManager.CreateFood(adapter.Transform(requestDto));
         }
+
+        public List<ShowFoodDto> ListFoods()
+        {
+            var adapter = new ListFoodAdapter();
+            var list = _restaurantManager.ListFood();
+            return adapter.Transform(list);
+        }
     }
 }
