@@ -1,14 +1,18 @@
 <div class="row clearfix" [@routerTransition]>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
+        <div class="card main-content">
             <div class="header">
                 <h2>
-                    Restaurant
+                    {{l("Restaurant")}}
                 </h2>
             </div>
             <div class="body">
 
             </div>
+            <button type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" (click)="createFood()">
+                <i class="material-icons">add</i>
+            </button>
         </div>
     </div>
 </div>
+<create-food #createFoodModal (modalSave)="refresh()"></create-food>

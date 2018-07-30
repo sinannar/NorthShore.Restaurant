@@ -16,7 +16,6 @@ import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module
 import { SharedModule } from '@shared/shared.module';
 
 import { HomeComponent } from '@app/home/home.component';
-import { RestaurantComponent } from '@app/restaurant/restaurant.component';
 import { AboutComponent } from '@app/about/about.component';
 import { UsersComponent } from '@app/users/users.component';
 import { CreateUserComponent } from '@app/users/create-user/create-user.component';
@@ -35,11 +34,14 @@ import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 import { MaterialInput } from '@shared/directives/material-input.directive';
 
+import { RestaurantComponent } from '@app/restaurant/restaurant.component';
+import { CreateFoodComponent } from '@app/restaurant/create-food/create-food.component';
+
+
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        RestaurantComponent,
         AboutComponent,
         TenantsComponent,
         CreateTenantComponent,
@@ -55,8 +57,10 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         SideBarUserAreaComponent,
         SideBarNavComponent,
         SideBarFooterComponent,
-        RightSideBarComponent
+        RightSideBarComponent,
 
+        RestaurantComponent,
+        CreateFoodComponent
     ],
     imports: [
         CommonModule,

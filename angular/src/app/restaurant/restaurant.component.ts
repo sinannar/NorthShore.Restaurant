@@ -1,7 +1,9 @@
-import { Component, Injector, AfterViewInit } from '@angular/core';
+import { Component, Injector, AfterViewInit, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { MenuServiceProxy, CreateFoodDto } from '@shared/service-proxies/service-proxies';
+
+import { CreateFoodComponent } from 'app/restaurant/create-food/create-food.component';
 
 @Component({
     templateUrl: './restaurant.component.html',
@@ -10,6 +12,10 @@ import { MenuServiceProxy, CreateFoodDto } from '@shared/service-proxies/service
 })
 export class RestaurantComponent extends AppComponentBase {
 
+    @ViewChild('createFoodModal') createTenantModal: CreateFoodComponent;
+    // @ViewChild('editTenantModal') editTenantModal: EditTenantComponent;
+
+
     constructor(
         injector: Injector,
         private _menuService: MenuServiceProxy,
@@ -17,10 +23,8 @@ export class RestaurantComponent extends AppComponentBase {
         super(injector);
     }
 
-    callApi() {
-        this._menuService.createFood(new CreateFoodDto()).subscribe(() => {
-            console.log('FIRST API CALL FROM FE');
-        });
+    createFood(){
+        this.createTenantModal.show();
     }
 
 }
