@@ -1,5 +1,6 @@
 ﻿using Abp.Authorization;
 using Abp.Domain.Repositories;
+using NorthShore.Restaurant.Restaurant.Adapters;
 using NorthShore.Restaurant.Restaurant.Dto;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,19 @@ namespace NorthShore.Restaurant.Restaurant
 {
     public class MenuAppService : RestaurantAppServiceBase, IMenuAppService
     {
-        private IRepository<Food, long> _foodRepository;
+        private IRestaurantManager _restaurantManager { get; set; }
+
         public MenuAppService(
-                IRepository<Food, long> foodRepository
+            IRestaurantManager restaurantManager
             )
         {
-            _foodRepository = foodRepository;
+            _restaurantManager = restaurantManager;
         }
 
-        public async Task CreateFood(CreateFoodDto request)
+        public async Task CreateFood(CreateFoodDto requestDto)
         {
-            await Task.Run(() => {});
-            //throw new NotImplementedException();
+            var adapter = new CreateFoodAdapter();
+            await _restaurantManager.CreateFood(adapter.Transform(requestDto));
         }
     }
 }

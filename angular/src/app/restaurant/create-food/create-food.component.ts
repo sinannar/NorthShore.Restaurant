@@ -5,7 +5,7 @@ import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
     selector: 'create-food',
-    templateUrl: './create-food.component.html'
+    templateUrl: './create-food.component.html',
 })
 export class CreateFoodComponent extends AppComponentBase {
     @ViewChild('createFoodModal') modal: ModalDirective;
@@ -37,7 +37,7 @@ export class CreateFoodComponent extends AppComponentBase {
         $.AdminBSB.input.activate($(this.modalContent.nativeElement));
     }
 
-    save(){
+    save() {
         this.saving = true;
         this._service.createFood(this.food)
             .finally(() => { this.saving = false; })

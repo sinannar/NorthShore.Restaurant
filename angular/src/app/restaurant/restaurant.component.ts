@@ -8,7 +8,6 @@ import { CreateFoodComponent } from 'app/restaurant/create-food/create-food.comp
 @Component({
     templateUrl: './restaurant.component.html',
     animations: [appModuleAnimation()],
-    providers: [MenuServiceProxy]
 })
 export class RestaurantComponent extends AppComponentBase {
 

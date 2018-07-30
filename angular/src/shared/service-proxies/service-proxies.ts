@@ -220,14 +220,14 @@ export class MenuServiceProxy {
     }
 
     /**
-     * @request (optional) 
+     * @requestDto (optional) 
      * @return Success
      */
-    createFood(request: CreateFoodDto | null | undefined): Observable<void> {
+    createFood(requestDto: CreateFoodDto | null | undefined): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Menu/CreateFood";
         url_ = url_.replace(/[?&]$/, "");
 
-        const content_ = JSON.stringify(request);
+        const content_ = JSON.stringify(requestDto);
 
         let options_ : any = {
             body: content_,
