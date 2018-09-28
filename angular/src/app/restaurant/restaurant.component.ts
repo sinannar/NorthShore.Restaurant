@@ -42,5 +42,8 @@ export class RestaurantComponent extends AppComponentBase {
         this.notify.warn('This service (deleteFood) is not available yet');
     }
 
+    refresh($event:any) {
+        this.list();
+    }
 
 }
