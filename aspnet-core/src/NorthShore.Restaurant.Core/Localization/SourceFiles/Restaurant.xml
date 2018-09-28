@@ -91,5 +91,13 @@
     <text name="StartTyping">Start Typing</text>
     <text name="Skins">Skins</text>
     <text name="Settings">Settings</text>
+
+    <text name="CreateNewFood">Create new food</text>
+    <text name="FoodName">Food name</text>
+    <text name="EditFood">Edit food</text>
+    <text name="IsDairyFree">Dairy free</text>
+    <text name="IsGlutenFree">Gluten free</text>
+    <text name="IsNutFree">Nut free</text>
+
   </texts>
 </localizationDictionary>

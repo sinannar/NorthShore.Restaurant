@@ -12,9 +12,9 @@
                         <tr>
                             <th>{{l('Name')}}</th>
                             <th>{{l('Calorie')}}</th>
-                            <th>{{l('IsDairyFree')}}</th>
-                            <th>{{l('IsGlutenFree')}}</th>
-                            <th>{{l('IsNutFree')}}</th>
+                            <th><div style="text-align:center">{{l('IsDairyFree')}}</div></th>
+                            <th><div style="text-align:center">{{l('IsGlutenFree')}}</div></th>
+                            <th><div style="text-align:center">{{l('IsNutFree')}}</div></th>
                             <th>{{l('Price')}}</th>
                             <th>{{l('Actions')}}</th>
                         </tr>
@@ -23,9 +23,18 @@
                         <tr *ngFor="let food of foods">
                             <td>{{food.name}}</td>
                             <td>{{food.calorie}}</td>
-                            <td>{{food.isDairyFree}}</td>
-                            <td>{{food.isGlutenFree}}</td>
-                            <td>{{food.isNutFree}}</td>
+                            <td align="center">
+                                <i class="material-icons" *ngIf="food.isDairyFree" style="color:green;">check_box</i>
+                                <i class="material-icons" *ngIf="!food.isDairyFree" style="color:red;">indeterminate_check_box</i>
+                            </td>
+                            <td align="center">
+                                <i class="material-icons" *ngIf="food.isGlutenFree" style="color:green;">check_box</i>
+                                <i class="material-icons" *ngIf="!food.isGlutenFree" style="color:red;">indeterminate_check_box</i>
+                            </td>
+                            <td align="center">
+                                <i class="material-icons" *ngIf="food.isNutFree" style="color:green;">check_box</i>
+                                <i class="material-icons" *ngIf="!food.isNutFree" style="color:red;">indeterminate_check_box</i>
+                            </td>
                             <td>{{food.price}}</td>
                             <td class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
