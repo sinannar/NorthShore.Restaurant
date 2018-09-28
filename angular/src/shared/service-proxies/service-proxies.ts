@@ -272,6 +272,58 @@ export class MenuServiceProxy {
     }
 
     /**
+     * @request (optional) 
+     * @return Success
+     */
+    editFood(request: EditFoodDto | null | undefined): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Menu/EditFood";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(request);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processEditFood(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processEditFood(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<void>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processEditFood(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return _observableOf<void>(<any>null);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(<any>null);
+    }
+
+    /**
      * @id (optional) 
      * @return Success
      */
@@ -2071,6 +2123,73 @@ export class CreateFoodDto implements ICreateFoodDto {
 export interface ICreateFoodDto {
     calorie: number | undefined;
     name: string | undefined;
+}
+
+export class EditFoodDto implements IEditFoodDto {
+    id: number | undefined;
+    calorie: number | undefined;
+    name: string | undefined;
+    isGlutenFree: boolean | undefined;
+    isDairyFree: boolean | undefined;
+    isNutFree: boolean | undefined;
+    price: number | undefined;
+
+    constructor(data?: IEditFoodDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.id = data["id"];
+            this.calorie = data["calorie"];
+            this.name = data["name"];
+            this.isGlutenFree = data["isGlutenFree"];
+            this.isDairyFree = data["isDairyFree"];
+            this.isNutFree = data["isNutFree"];
+            this.price = data["price"];
+        }
+    }
+
+    static fromJS(data: any): EditFoodDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new EditFoodDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["calorie"] = this.calorie;
+        data["name"] = this.name;
+        data["isGlutenFree"] = this.isGlutenFree;
+        data["isDairyFree"] = this.isDairyFree;
+        data["isNutFree"] = this.isNutFree;
+        data["price"] = this.price;
+        return data; 
+    }
+
+    clone(): EditFoodDto {
+        const json = this.toJSON();
+        let result = new EditFoodDto();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEditFoodDto {
+    id: number | undefined;
+    calorie: number | undefined;
+    name: string | undefined;
+    isGlutenFree: boolean | undefined;
+    isDairyFree: boolean | undefined;
+    isNutFree: boolean | undefined;
+    price: number | undefined;
 }
 
 export class ShowFoodDto implements IShowFoodDto {

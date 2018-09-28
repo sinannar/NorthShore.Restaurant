@@ -30,17 +30,14 @@ namespace NorthShore.Restaurant.Restaurant
             await _foodRepository.InsertAsync(food);
         }
 
-        public async Task DeleteFood(long foodId)
+        public async Task EditFood(Food food)
         {
-            Food food = await _foodRepository.GetAsync(foodId);
-            if (food != null)
-            {
-                await _foodRepository.DeleteAsync(food);
-            }
-            else
-            {
-                throw new Exception("Given food is not found to delete");
-            }
+            await _foodRepository.UpdateAsync(food);
+        }
+
+        public async Task DeleteFood(Food food)
+        {
+            await _foodRepository.DeleteAsync(food);            
         }
 
         public IQueryable<Food> ListFood()

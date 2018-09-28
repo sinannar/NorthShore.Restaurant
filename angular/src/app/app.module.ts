@@ -36,6 +36,7 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
 
 import { RestaurantComponent } from '@app/restaurant/restaurant.component';
 import { CreateFoodComponent } from '@app/restaurant/create-food/create-food.component';
+import { EditFoodComponent } from '@app/restaurant/edit-food/edit-food.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { CreateFoodComponent } from '@app/restaurant/create-food/create-food.com
         RightSideBarComponent,
 
         RestaurantComponent,
-        CreateFoodComponent
+        CreateFoodComponent,
+        EditFoodComponent
     ],
     imports: [
         CommonModule,

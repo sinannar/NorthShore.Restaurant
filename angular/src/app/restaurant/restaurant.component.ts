@@ -4,6 +4,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { MenuServiceProxy, ShowFoodDto } from '@shared/service-proxies/service-proxies';
 
 import { CreateFoodComponent } from 'app/restaurant/create-food/create-food.component';
+import { EditFoodComponent } from 'app/restaurant/edit-food/edit-food.component';
 
 @Component({
     templateUrl: './restaurant.component.html',
@@ -11,11 +12,11 @@ import { CreateFoodComponent } from 'app/restaurant/create-food/create-food.comp
 })
 export class RestaurantComponent extends AppComponentBase {
 
-    @ViewChild('createFoodModal') createTenantModal: CreateFoodComponent;
-    // @ViewChild('editTenantModal') editTenantModal: EditTenantComponent;
+    @ViewChild('createFoodModal') createFoodModal: CreateFoodComponent;
+    @ViewChild('editFoodModal') editFoodModal: EditFoodComponent;
 
     foods: ShowFoodDto[];
-
+    selectedFood:ShowFoodDto;
     constructor(
         injector: Injector,
         private _menuService: MenuServiceProxy,
@@ -31,15 +32,15 @@ export class RestaurantComponent extends AppComponentBase {
     }
 
     createFood() {
-        this.createTenantModal.show();
+        this.createFoodModal.show();
     }
 
     editFood(food: ShowFoodDto) {
-        this.notify.warn('This service (editFood) is not available yet');
+        this.selectedFood = food;
+        this.editFoodModal.show();
     }
 
     deleteFood(food: ShowFoodDto) {
-        // this.notify.warn('This service (deleteFood) is not available yet');
         this._menuService.deleteFood(food.id).subscribe(() => {
             this.list();
         })
