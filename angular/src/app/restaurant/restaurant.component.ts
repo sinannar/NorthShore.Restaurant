@@ -39,7 +39,10 @@ export class RestaurantComponent extends AppComponentBase {
     }
 
     deleteFood(food: ShowFoodDto) {
-        this.notify.warn('This service (deleteFood) is not available yet');
+        // this.notify.warn('This service (deleteFood) is not available yet');
+        this._menuService.deleteFood(food.id).subscribe(() => {
+            this.list();
+        })
     }
 
     refresh($event:any) {

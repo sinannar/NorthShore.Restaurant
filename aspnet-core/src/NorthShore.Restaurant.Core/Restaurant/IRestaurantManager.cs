@@ -9,6 +9,7 @@ namespace NorthShore.Restaurant.Restaurant
     public interface IRestaurantManager
     {
         Task CreateFood(Food food);
+        Task DeleteFood(long foodId);
         IQueryable<Food> ListFood();
     }
 }

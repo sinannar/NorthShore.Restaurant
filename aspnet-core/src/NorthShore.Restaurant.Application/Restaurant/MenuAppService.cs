@@ -26,6 +26,12 @@ namespace NorthShore.Restaurant.Restaurant
             await _restaurantManager.CreateFood(adapter.Transform(requestDto));
         }
 
+        public async Task DeleteFood(DeleteFoodDto request)
+        {
+            await _restaurantManager.DeleteFood(request.Id);
+        }
+
+
         public List<ShowFoodDto> ListFoods()
         {
             var adapter = new ListFoodAdapter();

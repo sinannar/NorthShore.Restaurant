@@ -17,9 +17,6 @@ export class CreateFoodComponent extends AppComponentBase {
     saving: boolean = false;
     food: CreateFoodDto = null;
 
-    /**
-     *
-     */
     constructor(
         injector: Injector,
         private _service: MenuServiceProxy

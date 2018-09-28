@@ -9,6 +9,7 @@ namespace NorthShore.Restaurant.Restaurant
     public interface IMenuAppService
     {
         Task CreateFood(CreateFoodDto request);
+        Task DeleteFood(DeleteFoodDto request);
         List<ShowFoodDto> ListFoods();
     }
 }
