@@ -30,6 +30,11 @@ namespace NorthShore.Restaurant.Restaurant
             await _foodRepository.InsertAsync(food);
         }
 
+        public async Task CreateMenu(Menu menu)
+        {
+            await _menuRepository.InsertAsync(menu);
+        }
+
         public async Task EditFood(Food food)
         {
             await _foodRepository.UpdateAsync(food);
@@ -38,6 +43,11 @@ namespace NorthShore.Restaurant.Restaurant
         public async Task DeleteFood(Food food)
         {
             await _foodRepository.DeleteAsync(food);            
+        }
+
+        public async Task DeleteMenu(Menu menu)
+        {
+            await _menuRepository.DeleteAsync(menu);            
         }
 
         public IQueryable<Food> ListFood()

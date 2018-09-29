@@ -12,42 +12,10 @@ import { EditFoodComponent } from 'app/restaurant/edit-food/edit-food.component'
 })
 export class RestaurantComponent extends AppComponentBase {
 
-    @ViewChild('createFoodModal') createFoodModal: CreateFoodComponent;
-    @ViewChild('editFoodModal') editFoodModal: EditFoodComponent;
 
-    foods: ShowFoodDto[];
-    selectedFood:ShowFoodDto;
     constructor(
         injector: Injector,
-        private _restaurantService: RestaurantServiceProxy,
     ) {
         super(injector);
-        this.list();
     }
-
-    list() {
-        this._restaurantService.listFoods().subscribe(result => {
-            this.foods = result;
-        });
-    }
-
-    createFood() {
-        this.createFoodModal.show();
-    }
-
-    editFood(food: ShowFoodDto) {
-        this.selectedFood = food;
-        this.editFoodModal.show();
-    }
-
-    deleteFood(food: ShowFoodDto) {
-        this._restaurantService.deleteFood(food.id).subscribe(() => {
-            this.list();
-        })
-    }
-
-    refresh($event:any) {
-        this.list();
-    }
-
 }

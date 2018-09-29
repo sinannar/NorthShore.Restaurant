@@ -13,20 +13,28 @@ namespace NorthShore.Restaurant.Restaurant
     {
         private IRestaurantManager _restaurantManager { get; set; }
         private IRepository<Food, long> _foodRepository { get; set; }
+        private IRepository<Menu, long> _menuRepository { get; set; }
 
         public RestaurantAppService(
             IRestaurantManager restaurantManager,
-            IRepository<Food, long> foodRepository
+            IRepository<Food, long> foodRepository,
+            IRepository<Menu, long> menuRepository
             )
         {
             _restaurantManager = restaurantManager;
             _foodRepository = foodRepository;
+            _menuRepository = menuRepository;
         }
 
         public async Task CreateFood(CreateFoodDto requestDto)
         {
             var adapter = new CreateFoodAdapter();
             await _restaurantManager.CreateFood(adapter.Transform(requestDto));
+        }
+
+        public async Task CreateMenu(CreateMenuDto requestDto){
+            var adapter = new CreateMenuAdapter();
+            await _restaurantManager.CreateMenu(adapter.Transform(requestDto));
         }
 
         public async Task EditFood(EditFoodDto request)
@@ -43,9 +51,22 @@ namespace NorthShore.Restaurant.Restaurant
             }
         }
 
-        public async Task DeleteFood(DeleteFoodDto request)
+        public async Task DeleteFood(long requestId)
         {
-            Food entity = await _foodRepository.GetAsync(request.Id);
+            Menu entity = await _menuRepository.GetAsync(requestId);
+            if (entity != null)
+            {
+                await _restaurantManager.DeleteMenu(entity);
+            }
+            else
+            {
+                throw new Exception("Given menu is not found to delete");
+            }
+        }
+
+        public async Task DeleteMenu(long requestId)
+        {
+            Food entity = await _foodRepository.GetAsync(requestId);
             if (entity != null)
             {
                 await _restaurantManager.DeleteFood(entity);

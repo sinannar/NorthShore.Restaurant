@@ -4,8 +4,9 @@ using System.Text;
 
 namespace NorthShore.Restaurant.Restaurant.Dto
 {
-    public class DeleteFoodDto
+    public class CreateMenuDto
     {
-        public long Id { get; set; }
+        public string Name { get; set; }
+        public decimal DiscountRate { get; set; }
     }
 }

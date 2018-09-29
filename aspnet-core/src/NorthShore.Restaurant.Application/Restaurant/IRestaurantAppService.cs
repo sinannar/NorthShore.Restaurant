@@ -10,7 +10,11 @@ namespace NorthShore.Restaurant.Restaurant
     {
         Task CreateFood(CreateFoodDto request);
         Task EditFood(EditFoodDto request);
-        Task DeleteFood(DeleteFoodDto request);
+        Task DeleteFood(long requestId);
         List<ShowFoodDto> ListFoods();
+
+        Task CreateMenu(CreateMenuDto request);
+        Task DeleteMenu(long requestId);
+
     }
 }
