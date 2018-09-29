@@ -1,6 +1,6 @@
 import { Component, ViewChild, Injector, Output, Input, EventEmitter, ElementRef } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { MenuServiceProxy, EditFoodDto, ShowFoodDto } from '@shared/service-proxies/service-proxies';
+import { RestaurantServiceProxy, EditFoodDto, ShowFoodDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
 
 @Component({
@@ -36,7 +36,7 @@ export class EditFoodComponent extends AppComponentBase {
 
     constructor(
         injector: Injector,
-        private _service: MenuServiceProxy
+        private _restaurantService: RestaurantServiceProxy
     ) {
         super(injector);
     }
@@ -52,7 +52,7 @@ export class EditFoodComponent extends AppComponentBase {
 
     save() {
         this.saving = true;
-        this._service.editFood(this.food)
+        this._restaurantService.editFood(this.food)
             .finally(() => { this.saving = false; })
             .subscribe(() => {
                 this.notify.info(this.l('SavedSuccessfully'));

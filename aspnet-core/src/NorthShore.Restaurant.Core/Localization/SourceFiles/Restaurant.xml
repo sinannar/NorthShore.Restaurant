@@ -98,6 +98,6 @@
     <text name="IsDairyFree">Dairy free</text>
     <text name="IsGlutenFree">Gluten free</text>
     <text name="IsNutFree">Nut free</text>
-
+    <text name="FoodList">Food list</text>
   </texts>
 </localizationDictionary>

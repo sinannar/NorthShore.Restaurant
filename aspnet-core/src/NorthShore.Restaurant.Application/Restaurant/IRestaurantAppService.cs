@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NorthShore.Restaurant.Restaurant
 {
-    public interface IMenuAppService
+    public interface IRestaurantAppService
     {
         Task CreateFood(CreateFoodDto request);
         Task EditFood(EditFoodDto request);

@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace NorthShore.Restaurant.Restaurant
 {
-    public class MenuAppService : RestaurantAppServiceBase, IMenuAppService
+    public class RestaurantAppService : RestaurantAppServiceBase, IRestaurantAppService
     {
         private IRestaurantManager _restaurantManager { get; set; }
         private IRepository<Food, long> _foodRepository { get; set; }
 
-        public MenuAppService(
+        public RestaurantAppService(
             IRestaurantManager restaurantManager,
             IRepository<Food, long> foodRepository
             )

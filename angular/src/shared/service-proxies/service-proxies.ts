@@ -209,7 +209,7 @@ export class ConfigurationServiceProxy {
 }
 
 @Injectable()
-export class MenuServiceProxy {
+export class RestaurantServiceProxy {
     private http: HttpClient;
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
@@ -224,7 +224,7 @@ export class MenuServiceProxy {
      * @return Success
      */
     createFood(requestDto: CreateFoodDto | null | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/Menu/CreateFood";
+        let url_ = this.baseUrl + "/api/services/app/Restaurant/CreateFood";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(requestDto);
@@ -276,7 +276,7 @@ export class MenuServiceProxy {
      * @return Success
      */
     editFood(request: EditFoodDto | null | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/Menu/EditFood";
+        let url_ = this.baseUrl + "/api/services/app/Restaurant/EditFood";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(request);
@@ -328,7 +328,7 @@ export class MenuServiceProxy {
      * @return Success
      */
     deleteFood(id: number | null | undefined): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/Menu/DeleteFood?";
+        let url_ = this.baseUrl + "/api/services/app/Restaurant/DeleteFood?";
         if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
@@ -378,7 +378,7 @@ export class MenuServiceProxy {
      * @return Success
      */
     listFoods(): Observable<ShowFoodDto[]> {
-        let url_ = this.baseUrl + "/api/services/app/Menu/ListFoods";
+        let url_ = this.baseUrl + "/api/services/app/Restaurant/ListFoods";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {

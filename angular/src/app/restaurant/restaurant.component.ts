@@ -1,7 +1,7 @@
 import { Component, Injector, AfterViewInit, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
-import { MenuServiceProxy, ShowFoodDto } from '@shared/service-proxies/service-proxies';
+import { RestaurantServiceProxy, ShowFoodDto } from '@shared/service-proxies/service-proxies';
 
 import { CreateFoodComponent } from 'app/restaurant/create-food/create-food.component';
 import { EditFoodComponent } from 'app/restaurant/edit-food/edit-food.component';
@@ -19,14 +19,14 @@ export class RestaurantComponent extends AppComponentBase {
     selectedFood:ShowFoodDto;
     constructor(
         injector: Injector,
-        private _menuService: MenuServiceProxy,
+        private _restaurantService: RestaurantServiceProxy,
     ) {
         super(injector);
         this.list();
     }
 
     list() {
-        this._menuService.listFoods().subscribe(result => {
+        this._restaurantService.listFoods().subscribe(result => {
             this.foods = result;
         });
     }
@@ -41,7 +41,7 @@ export class RestaurantComponent extends AppComponentBase {
     }
 
     deleteFood(food: ShowFoodDto) {
-        this._menuService.deleteFood(food.id).subscribe(() => {
+        this._restaurantService.deleteFood(food.id).subscribe(() => {
             this.list();
         })
     }
