@@ -52,8 +52,12 @@ namespace NorthShore.Restaurant.Restaurant
 
         public IQueryable<Food> ListFood()
         {
-            return _foodRepository.GetAll();
+            return _foodRepository.GetAllIncluding(m => m.MenuMappings);
         }
 
+        public IQueryable<Menu> ListMenu()
+        {
+            return _menuRepository.GetAllIncluding(m => m.FoodMappings);
+        }
     }
 }

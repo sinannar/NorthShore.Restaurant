@@ -53,6 +53,20 @@ namespace NorthShore.Restaurant.Restaurant
 
         public async Task DeleteFood(long requestId)
         {
+            Food entity = await _foodRepository.GetAsync(requestId);
+            if (entity != null)
+            {
+                await _restaurantManager.DeleteFood(entity);
+            }
+            else
+            {
+                throw new Exception("Given food is not found to delete");
+            }
+            
+        }
+
+        public async Task DeleteMenu(long requestId)
+        {
             Menu entity = await _menuRepository.GetAsync(requestId);
             if (entity != null)
             {
@@ -64,23 +78,17 @@ namespace NorthShore.Restaurant.Restaurant
             }
         }
 
-        public async Task DeleteMenu(long requestId)
-        {
-            Food entity = await _foodRepository.GetAsync(requestId);
-            if (entity != null)
-            {
-                await _restaurantManager.DeleteFood(entity);
-            }
-            else
-            {
-                throw new Exception("Given food is not found to delete");
-            }
-        }
-
         public List<ShowFoodDto> ListFoods()
         {
             var adapter = new ListFoodAdapter();
             var list = _restaurantManager.ListFood();
+            return adapter.Transform(list);
+        }
+
+        public List<ShowMenuDto> ListMenus()
+        {
+            var adapter = new ListMenuAdapter();
+            var list = _restaurantManager.ListMenu();
             return adapter.Transform(list);
         }
     }

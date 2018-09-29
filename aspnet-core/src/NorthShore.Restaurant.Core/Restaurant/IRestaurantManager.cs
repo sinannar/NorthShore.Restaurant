@@ -15,6 +15,8 @@ namespace NorthShore.Restaurant.Restaurant
 
         Task CreateMenu(Menu menu);
         Task DeleteMenu(Menu menu);
+        IQueryable<Menu> ListMenu();
+
 
     }
 }
