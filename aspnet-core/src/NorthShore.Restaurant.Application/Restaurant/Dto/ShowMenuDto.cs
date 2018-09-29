@@ -9,8 +9,8 @@ namespace NorthShore.Restaurant.Restaurant.Dto
         public long Id { get; set; }
         public string Name { get; set; }
         public decimal DiscountRate { get; set; }
-        // public decimal TotalCalorie{get;set;}
-        // public decimal TotalPrice{get;set;}
-        // public decimal DiscountedPrice{get;set;}
+        public decimal TotalCalorie{get;set;}
+        public decimal TotalPrice{get;set;}
+        public decimal DiscountedPrice{get;set;}
     }
 }

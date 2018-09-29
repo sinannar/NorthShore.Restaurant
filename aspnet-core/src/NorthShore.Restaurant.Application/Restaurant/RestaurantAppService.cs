@@ -91,5 +91,37 @@ namespace NorthShore.Restaurant.Restaurant
             var list = _restaurantManager.ListMenu();
             return adapter.Transform(list);
         }
+
+        public async Task<List<ShowFoodDto>> ListFoodsInMenu(long menuId)
+        {
+            var menu = await _menuRepository.GetAsync(menuId);
+            if(menu != null)
+            {
+                var menuFoodMappings = menu.FoodMappings;
+                var mappedFoods = _restaurantManager.ListMenuFoods(menuFoodMappings);
+                var adapter = new ListFoodAdapter();
+                return adapter.Transform(mappedFoods);
+            }
+            else
+            {
+                throw new Exception("Given menu is not found");
+            }
+        }
+
+        public async Task<List<ShowFoodDto>> ListFoodsNotInMenu(long menuId)
+        {
+            var menu = await _menuRepository.GetAsync(menuId);
+            if(menu != null)
+            {
+                var menuFoodMappings = menu.FoodMappings;
+                var mappedFoods = _restaurantManager.ListNonMenuFoods(menuFoodMappings);
+                var adapter = new ListFoodAdapter();
+                return adapter.Transform(mappedFoods);
+            }
+            else
+            {
+                throw new Exception("Given menu is not found");
+            }
+        }
     }
 }

@@ -42,12 +42,12 @@ namespace NorthShore.Restaurant.Restaurant
 
         public async Task DeleteFood(Food food)
         {
-            await _foodRepository.DeleteAsync(food);            
+            await _foodRepository.DeleteAsync(food);
         }
 
         public async Task DeleteMenu(Menu menu)
         {
-            await _menuRepository.DeleteAsync(menu);            
+            await _menuRepository.DeleteAsync(menu);
         }
 
         public IQueryable<Food> ListFood()
@@ -59,5 +59,74 @@ namespace NorthShore.Restaurant.Restaurant
         {
             return _menuRepository.GetAllIncluding(m => m.FoodMappings);
         }
+
+        public IQueryable<Food> ListMenuFoods(IEnumerable<FoodMenuMapping> mapping)
+        {
+            return _foodRepository
+                .GetAll()
+                .Where(food => mapping.Where(map => food.Id == map.FoodId).Any());
+        }
+        public IQueryable<Food> ListNonMenuFoods(IEnumerable<FoodMenuMapping> mapping)
+        {
+            return _foodRepository
+                .GetAll()
+                .Where(food => !mapping.Where(map => food.Id == map.FoodId).Any());
+        }
+
+        public IQueryable<Menu> ListFoodMenus(IEnumerable<FoodMenuMapping> mapping)
+        {
+            return _menuRepository
+                .GetAll()
+                .Where(menu => mapping.Where(map => menu.Id == map.MenuId).Any());
+        }
+
+        public async Task DeleteFoodMenuMapping(long foodId, long menuId)
+        {
+            var existingMapping = _foodMenuMappingRepository.GetAll().Where(m => m.FoodId == foodId && m.MenuId == menuId).FirstOrDefault();
+            if (existingMapping == null)
+            {
+                throw new Exception($"Food with ID:{foodId} and Menu with ID:{menuId} is not exist");
+            }
+            else
+            {
+                await DeleteFoodMenuMapping(existingMapping);
+            }
+        }
+        public async Task DeleteFoodMenuMapping(FoodMenuMapping mapping)
+        {
+            await this._foodMenuMappingRepository.DeleteAsync(mapping);
+        }
+
+        public async Task CreateFoodMenuMapping(long foodId, long menuId)
+        {
+            var existingMapping = _foodMenuMappingRepository.GetAll().Where(m => m.FoodId == foodId && m.MenuId == menuId).FirstOrDefault();
+            if (existingMapping != null)
+            {
+                throw new Exception($"Food with ID:{foodId} and Menu with ID:{menuId} already has mapping");
+            }
+            else
+            {
+                await _foodMenuMappingRepository.InsertAsync(new FoodMenuMapping
+                {
+                    MenuId = menuId,
+                    FoodId = foodId
+                });
+            }
+        }
+        public async Task CreateFoodMenuMapping(long foodId, List<long> menuIds)
+        {
+            foreach (var menuId in menuIds)
+            {
+                await CreateFoodMenuMapping(foodId, menuId);
+            }
+        }
+        public async Task CreateFoodMenuMapping(List<long> foodIds, long menuId)
+        {
+            foreach (var foodId in foodIds)
+            {
+                await CreateFoodMenuMapping(foodId, menuId);
+            }
+        }
+
     }
 }

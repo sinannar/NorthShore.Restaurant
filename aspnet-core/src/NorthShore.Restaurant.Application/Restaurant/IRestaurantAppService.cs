@@ -16,5 +16,8 @@ namespace NorthShore.Restaurant.Restaurant
         Task CreateMenu(CreateMenuDto request);
         Task DeleteMenu(long requestId);
         List<ShowMenuDto> ListMenus();
+
+        Task<List<ShowFoodDto>> ListFoodsInMenu(long menuId);
+        Task<List<ShowFoodDto>> ListFoodsNotInMenu(long menuId);
     }
 }

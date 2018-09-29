@@ -14,7 +14,10 @@ namespace NorthShore.Restaurant.Restaurant.Adapters
             {
                 Id = menu.Id,
                 Name = menu.Name,
-                DiscountRate = menu.DiscountRate
+                DiscountRate = menu.DiscountRate,
+                TotalCalorie = menu.TotalCalorie,
+                TotalPrice = menu.TotalPrice,
+                DiscountedPrice = menu.DiscountedPrice,
             }).ToList();
         }
     }
