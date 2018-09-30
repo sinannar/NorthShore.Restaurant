@@ -16,6 +16,7 @@ namespace NorthShore.Restaurant.Restaurant
         Task CreateMenu(Menu menu);
         Task DeleteMenu(Menu menu);
         IQueryable<Menu> ListMenu();
+        Menu GetMenuWithMappings(long menuId);
 
         IQueryable<Food> ListMenuFoods(IEnumerable<FoodMenuMapping> mapping);
         IQueryable<Food> ListNonMenuFoods(IEnumerable<FoodMenuMapping> mapping);

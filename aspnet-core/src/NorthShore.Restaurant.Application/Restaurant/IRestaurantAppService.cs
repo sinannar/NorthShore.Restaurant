@@ -17,8 +17,8 @@ namespace NorthShore.Restaurant.Restaurant
         Task DeleteMenu(long requestId);
         List<ShowMenuDto> ListMenus();
 
-        Task<List<ShowFoodDto>> ListFoodsInMenu(long menuId);
-        Task<List<ShowFoodDto>> ListFoodsNotInMenu(long menuId);
+        List<ShowFoodDto> ListFoodsInMenu(long menuId);
+        List<ShowFoodDto> ListFoodsNotInMenu(long menuId);
 
         Task AddFoodToMenu(AddFoodToMenuDto request);
         Task RemoveFoodFromMenu(RemoveFoodFromMenuDto request);

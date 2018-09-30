@@ -11,7 +11,10 @@
                     <thead>
                         <tr>
                             <th>{{l('Name')}}</th>
+                            <th>{{l('TotalCalorie')}}</th>
+                            <th>{{l('TotalPrice')}}</th>
                             <th>{{l('DiscountRate')}}</th>
+                            <th>{{l('DiscountedPrice')}}</th>
                             <th>{{l('Actions')}}</th>
                         </tr>
                     </thead>
@@ -19,6 +22,9 @@
                         <tr *ngFor="let menu of menus">
                             <td>{{menu.name}}</td>
                             <td>{{menu.discountRate}}</td>
+                            <td>{{menu.totalPrice}}</td>
+                            <td>{{menu.discountRate}}</td>
+                            <td>{{menu.discountedPrice}}</td>
                             <td class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">

@@ -60,6 +60,14 @@ namespace NorthShore.Restaurant.Restaurant
             return _menuRepository.GetAllIncluding(m => m.FoodMappings);
         }
 
+        public Menu GetMenuWithMappings(long menuId)
+        {
+            return this.ListMenu()
+                .Where(m => m.Id == menuId)
+                .FirstOrDefault();
+        }
+
+
         public IQueryable<Food> ListMenuFoods(IEnumerable<FoodMenuMapping> mapping)
         {
             if (mapping == null)
@@ -139,13 +147,12 @@ namespace NorthShore.Restaurant.Restaurant
 
         public async Task UpdateMenuValues(long menuId)
         {
-            var menu = _menuRepository.Get(menuId);
+            var menu = GetMenuWithMappings(menuId);
             var foods = ListMenuFoods(menu.FoodMappings);
             menu.TotalPrice = !foods.Any() ? 0 : foods.Sum(food => food.Price);
             menu.TotalCalorie = !foods.Any() ? 0 : foods.Sum(food => food.Calorie);
             menu.DiscountedPrice = !foods.Any() ? 0 : menu.TotalPrice * (1 - (menu.DiscountRate / 100));
             await _menuRepository.UpdateAsync(menu);
         }
-
     }
 }

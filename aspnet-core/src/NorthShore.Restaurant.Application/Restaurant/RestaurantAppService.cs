@@ -93,9 +93,9 @@ namespace NorthShore.Restaurant.Restaurant
             return adapter.Transform(list);
         }
 
-        public async Task<List<ShowFoodDto>> ListFoodsInMenu(long menuId)
+        public List<ShowFoodDto> ListFoodsInMenu(long menuId)
         {
-            var menu = await _menuRepository.GetAsync(menuId);
+            var menu = _restaurantManager.GetMenuWithMappings(menuId);
             if(menu != null)
             {
                 var menuFoodMappings = menu.FoodMappings;
@@ -109,9 +109,9 @@ namespace NorthShore.Restaurant.Restaurant
             }
         }
 
-        public async Task<List<ShowFoodDto>> ListFoodsNotInMenu(long menuId)
+        public List<ShowFoodDto> ListFoodsNotInMenu(long menuId)
         {
-            var menu = await _menuRepository.GetAsync(menuId);
+            var menu = _restaurantManager.GetMenuWithMappings(menuId);
             if(menu != null)
             {
                 var menuFoodMappings = menu.FoodMappings;
@@ -127,11 +127,13 @@ namespace NorthShore.Restaurant.Restaurant
 
         public async Task AddFoodToMenu(AddFoodToMenuDto request){
             await _restaurantManager.CreateFoodMenuMapping(request.FoodIds, request.MenuId);
+            await UnitOfWorkManager.Current.SaveChangesAsync();
             await _restaurantManager.UpdateMenuValues(request.MenuId);
         }
 
         public async Task RemoveFoodFromMenu(RemoveFoodFromMenuDto request){
             await _restaurantManager.DeleteFoodMenuMapping(request.FoodId, request.MenuId);
+            await UnitOfWorkManager.Current.SaveChangesAsync();
             await _restaurantManager.UpdateMenuValues(request.MenuId);
         }
     }
