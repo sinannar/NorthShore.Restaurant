@@ -3,6 +3,7 @@ using Abp.Domain.Repositories;
 using NorthShore.Restaurant.Restaurant.Adapters;
 using NorthShore.Restaurant.Restaurant.Dto;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,6 +123,16 @@ namespace NorthShore.Restaurant.Restaurant
             {
                 throw new Exception("Given menu is not found");
             }
+        }
+
+        public async Task AddFoodToMenu(AddFoodToMenuDto request){
+            await _restaurantManager.CreateFoodMenuMapping(request.FoodIds, request.MenuId);
+            await _restaurantManager.UpdateMenuValues(request.MenuId);
+        }
+
+        public async Task RemoveFoodFromMenu(RemoveFoodFromMenuDto request){
+            await _restaurantManager.DeleteFoodMenuMapping(request.FoodId, request.MenuId);
+            await _restaurantManager.UpdateMenuValues(request.MenuId);
         }
     }
 }

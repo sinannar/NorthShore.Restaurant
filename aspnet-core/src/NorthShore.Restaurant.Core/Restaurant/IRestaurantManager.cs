@@ -26,6 +26,6 @@ namespace NorthShore.Restaurant.Restaurant
         Task CreateFoodMenuMapping(long foodId, long menuId);
         Task CreateFoodMenuMapping(long foodId, List<long> menuIds);
         Task CreateFoodMenuMapping(List<long> foodIds, long menuId);
-
+        Task UpdateMenuValues(long menuId);
     }
 }

@@ -4,6 +4,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { RestaurantServiceProxy, ShowMenuDto } from '@shared/service-proxies/service-proxies';
 
 import { CreateMenuComponent } from 'app/restaurant/create-menu/create-menu.component';
+import { EditMenuComponent} from '@app/restaurant/edit-menu/edit-menu.component';
 
 @Component({
     selector: 'list-menu',
@@ -13,6 +14,7 @@ import { CreateMenuComponent } from 'app/restaurant/create-menu/create-menu.comp
 export class ListMenuComponent extends AppComponentBase {
 
     @ViewChild('createMenuModal') createMenuModal: CreateMenuComponent;
+    @ViewChild('editMenuModal') editMenuModal: EditMenuComponent;
 
     menus: ShowMenuDto[];
     selectedMenu:ShowMenuDto;
@@ -35,7 +37,8 @@ export class ListMenuComponent extends AppComponentBase {
     }
 
     editMenu(menu: ShowMenuDto) {
-        this.notify.warn('This service (editMenu) is not available yet');
+        this.selectedMenu = menu;
+        this.editMenuModal.show();
     }
 
     deleteMenu(menu: ShowMenuDto) {

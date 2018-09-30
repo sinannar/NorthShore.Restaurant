@@ -13,6 +13,5 @@ namespace NorthShore.Restaurant.Restaurant.Dto
         public bool IsDairyFree { get; set; }
         public bool IsNutFree { get; set; }
         public decimal Price{get;set;}
-
     }
 }
