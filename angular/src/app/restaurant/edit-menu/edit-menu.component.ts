@@ -17,22 +17,27 @@ export class EditMenuComponent extends AppComponentBase implements OnInit {
     foodsInMenu: ShowFoodDto[];
     foodsNotInMenu: ShowFoodDto[];
 
-    _selectedFood:ShowFoodDto;
-    set selectedFood(value:ShowFoodDto)
-    {
+    _selectedFood: ShowFoodDto;
+    set selectedFood(value: ShowFoodDto) {
         this._selectedFood = value;
         this.setNewMapping(value);
     }
-    get selectedFood():ShowFoodDto{
+    get selectedFood(): ShowFoodDto {
         return this._selectedFood;
     }
 
-    setNewMapping(food:ShowFoodDto)
-    {
+    setNewMapping(food: ShowFoodDto) {
         var request = new AddFoodToMenuDto();
         request.menuId = this.selectedMenu.id;
         request.foodIds = [food.id];
-        this._restaurantService.addFoodToMenu(request).subscribe(()=>{
+        this._restaurantService.addFoodToMenu(request).subscribe(() => {
+            this.intializeEditMenu();
+            this.modalSave.emit(null);
+        });
+    }
+
+    deleteFoodMapping(food: ShowFoodDto) {
+        this._restaurantService.removeFoodFromMenu(this.selectedMenu.id, food.id).subscribe(() => {
             this.intializeEditMenu();
             this.modalSave.emit(null);
         });
@@ -59,7 +64,7 @@ export class EditMenuComponent extends AppComponentBase implements OnInit {
 
             request.subscribe(result => {
                 this.foodsInMenu = result[0],
-                this.foodsNotInMenu = result[1]
+                    this.foodsNotInMenu = result[1]
             });
         }
     }

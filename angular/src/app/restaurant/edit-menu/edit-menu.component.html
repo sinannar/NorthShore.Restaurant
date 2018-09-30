@@ -48,6 +48,7 @@
                                     <th>
                                         <div style="text-align:center">{{l('IsNutFree')}}</div>
                                     </th>
+                                    <th>{{l('Actions')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,6 +67,16 @@
                                         <i class="material-icons" *ngIf="food.isNutFree" style="color:green;">check_box</i>
                                         <i class="material-icons" *ngIf="!food.isNutFree" style="color:red;">indeterminate_check_box</i>
                                     </td>
+                                    <td class="dropdown">
+                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons">menu</i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="deleteFoodMapping(food)"><i
+                                                            class="material-icons">delete_sweep</i>Delete</a></li>
+                                            </ul>
+                                        </td>
                                 </tr>
                             </tbody>
                         </table>
